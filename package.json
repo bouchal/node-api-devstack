@@ -1,0 +1,32 @@
+{
+  "name": "node-api-devstack",
+  "version": "1.0.1",
+  "description": "This is just empty devstack for creating new API service.",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "node ./dist/index.js",
+    "dev": "babel-node src/index.js",
+    "build": "./node_modules/babel-cli/bin/babel.js ./src --out-dir ./dist --copy-files",
+    "test": "NODE_ENV=test mocha --require babel-core/register 'test/**/*.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:bouchal/node-devstack.git"
+  },
+  "author": "Antonin Bouchal <me@justme.cz>",
+  "license": "MIT",
+  "dependencies": {
+    "ajv": "^6.0.0",
+    "async-json-request": "^1.0.1",
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "environmentconfig": "^1.2.1",
+    "express": "^4.16.3",
+    "kontik": "^1.0.1",
+    "mocha": "^4.1.0",
+    "require-dir": "^1.0.0"
+  }
+}
