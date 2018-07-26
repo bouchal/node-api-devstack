@@ -32,4 +32,15 @@ export default class AbstractRoute {
     requestHandler(data) {
         throw new TypeError("You must override method 'getRequestHandler' in your route.");
     }
+
+    /**
+     * Route Middleware
+     *
+     * @param req
+     * @param res
+     * @param next
+     */
+    middleware(req, res, next) {
+        next();
+    }
 }

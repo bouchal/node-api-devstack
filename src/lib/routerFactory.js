@@ -7,9 +7,10 @@ const routes = requireDir(__dirname + '/../app/routes');
 const ajv = new Ajv({coerceTypes: true})
 
 const initRoute = (app, route) => {
-    const validate = ajv.compile(route.getSchema());
+    const schema = route.getSchema();
+    const validate = ajv.compile(schema);
 
-    app[route.getMethod().toLowerCase()](route.getPath(), async(req, res) => {
+    app[route.getMethod().toLowerCase()](route.getPath(), route.middleware, async(req, res) => {
         const data = req.data || req.query;
         if (!validate(data)) {
             return res.json({
