@@ -1,4 +1,5 @@
 import AbstractRoute from '../../lib/AbstractRoute';
+import RouteReponse from '../../lib/responses/RouteResponse';
 
 class PostData extends AbstractRoute {
     constructor(services, config) {
@@ -12,10 +13,10 @@ class PostData extends AbstractRoute {
     }
 
     getPath() {
-        return '/0/post';
+        return '/0/post/:postId';
     }
 
-    getSchema() {
+    getParametersSchema() {
         return {
             type: 'object',
             properties: {
@@ -27,8 +28,29 @@ class PostData extends AbstractRoute {
         }
     }
 
-    requestHandler({postId}) {
-        return this._postApiService.getPostData(postId);
+    getPreMiddleware() {
+        const touchMiddleware = (req, res, next) => {
+            console.log('Touching endpoint ' + this.getName());
+            next();
+        };
+
+        return touchMiddleware;
+    }
+
+    getMiddleware() {
+        const logMiddleware = (req, res, next) => {
+            const postId = req.params.postId;
+            console.log('Request for getting data of post with ID: ' + postId);
+            next();
+        };
+
+        return [logMiddleware]
+    }
+
+    async requestHandler(req, res) {
+        const data = await this._postApiService.getPostData(req.params.postId);
+
+        return new RouteReponse(data);
     }
 }
 
