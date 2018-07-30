@@ -18,6 +18,6 @@ export default class ErrorsResponse extends RouteResponse {
             return i.toJson();
         });
 
-        super({ errorJsons }, code);
+        super({ errors: errorJsons }, code);
     }
 }
