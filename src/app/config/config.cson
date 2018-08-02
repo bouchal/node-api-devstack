@@ -3,7 +3,7 @@ production:
 	port: #{process.env.PORT}
 
 	api:
-		posts: "https://jsonplaceholder.typicode.com/posts/"
+		posts: "https://jsonplaceholder.typicode.com/posts"
 
 test:
 	envName: "test"

@@ -53,7 +53,7 @@ So new Route could looks like this:
 
 ```javascript
 import AbstractRoute from '../../lib/AbstractRoute';
-import RouteReponse from '../../lib/responses/RouteResponse';
+import RouteResponse from '../../lib/responses/RouteResponse';
 
 export default class PostData extends AbstractRoute {
     getMethod() {
@@ -65,7 +65,7 @@ export default class PostData extends AbstractRoute {
     }
 
     async requestHandler(req, res) {
-        return await new RouteReponse({
+        return await new RouteResponse({
             text: 'Hello world'
         });
     }
@@ -81,7 +81,7 @@ For example:
 
 ```javascript
 import AbstractRoute from '../../lib/AbstractRoute';
-import RouteReponse from '../../lib/responses/RouteResponse';
+import RouteResponse from '../../lib/responses/RouteResponse';
 
 class PostData extends AbstractRoute {
     constructor(services, config) {
@@ -101,7 +101,7 @@ class PostData extends AbstractRoute {
     async requestHandler(req, res) {
         const data = await this._postApiService.getPostData(req.params.postId);
 
-        return new RouteReponse(data);
+        return new RouteResponse(data);
     }
 }
 
@@ -132,7 +132,7 @@ For example:
 
 ```javascript
 import AbstractRoute from '../../lib/AbstractRoute';
-import RouteReponse from '../../lib/responses/RouteResponse';
+import RouteResponse from '../../lib/responses/RouteResponse';
 
 class PostData extends AbstractRoute {
     constructor(services, config) {
@@ -164,7 +164,7 @@ class PostData extends AbstractRoute {
     async requestHandler(req, res) {
         const data = await this._postApiService.getPostData(req.params.postId);
 
-        return new RouteReponse(data);
+        return new RouteResponse(data);
     }
 }
 
@@ -183,6 +183,57 @@ It's useful for example for authorization request, where even input validation r
 
 Middleware defined in method `getMiddleware` is called after validation and right after that is called request handler. 
 
+### Routes grouping
+
+Many times you need to group routes. Simplest reason for that is just clear file structure. More complex
+reason is that you need to apply more complex rules to routes in group via separated router which is 
+use in parent router.
+
+Our RouterLoader can help in both scenarios.
+
+#### Route file structure
+
+Loader is set for recursive loading on routes from each subdirectories in routes directory and also
+their subdirectories.
+
+You can create files with any name but except `index.js` etc. This file name is reserved for router
+decorator which I will describe bellow.
+
+So your route structure could looks like this:
+
+```text
+└── routes
+    ├── Posts
+    │   ├── Detail
+    │   │   └-─ GetPostDetail.js
+    │   └── GetPostsList.js
+    └── GetPing.js
+```
+
+### Router decorator
+
+In each directory of you routes structure, you can create `index.js` file which contain and exports only
+one method, witch is used for router decorating and also it should return this same or some other express
+router. To router will append every route in this directory. 
+
+If you don't define new router or don't create `index.js` file, it will be use same router as in parent
+directory.
+
+You can use `config` and `service` variables in decorator as in routes definition.
+
+Router decorator can looks like this:
+
+```javascript
+module.exports = (parentRouter, services, config) => {
+    const router = express.Router();
+
+    parentRouter.use('/0', router);
+
+    return router;
+};
+```
+
+And each route in this directory will have path prefix `/0`.
 
 ## Responses
 

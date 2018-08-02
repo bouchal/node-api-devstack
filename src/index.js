@@ -9,18 +9,22 @@ process.on('unhandledRejection', up => {
 import express from 'express';
 import kontik from 'kontik';
 
-import routerFactory from "./lib/routerFactory";
+import RouterLoader from './lib/RouterLoader';
 import config from "./app/config";
 
+const serviceDir = __dirname + '/app/services';
+const routesDir = __dirname + '/app/routes';
+
 const services = kontik(config, {
-    dir: __dirname + '/app/services'
+    dir: serviceDir
 });
 
 
 const app = express();
 const PORT = config.port;
 
-app.use(routerFactory(services, config));
+const routerLoader = new RouterLoader(services, config);
+routerLoader.appendRoutesFromDir(app, routesDir);
 
 app.listen(PORT, () => {
     console.log('Listening on port ' + PORT);

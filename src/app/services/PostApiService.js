@@ -5,8 +5,12 @@ class SimplePostService {
         this._api = new JsonRequest(config.api.posts);
     }
 
+    getPostList() {
+        return this._api.get('');
+    }
+
     getPostData(postId) {
-        return this._api.get(postId);
+        return this._api.get('/' + postId);
     }
 }
 
