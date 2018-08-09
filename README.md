@@ -235,6 +235,46 @@ module.exports = (parentRouter, services, config) => {
 
 And each route in this directory will have path prefix `/0`.
 
+## Routes testing
+
+For more convenient testing of route requests, you can use prepared function `routeTester`, which create mock request
+and response and pass it to route request handler.
+
+__For example:__
+
+```javascript
+import routeTester from '../../../src/lib/routeTester';
+
+const mockServices = {
+    UserService: {
+        getUserData: (userId) => {
+            return { id: userId, firstName: 'John', lastName: 'Doe' }
+        }
+    }
+}
+
+const mockConfig = { ... }
+
+it('should return correct list data', routeTester(new GetUserRoute(mockServices, mockConfig), {}, async function (res) {
+    assert.equal(res.statusCode, 200, 'Wrong response status code');
+
+    const data = JSON.parse(res._getData());
+    assert.deepEqual(data, expected, 'Wrong data response');
+}));
+```
+
+### routeTester parameters:
+
+- __route__
+  - Instance of tested route. It should create with mock data in constructor.
+- __request additional data__
+  - In default request has set only 2 options `method` (from route method `getMethod`)
+  and `url` (from route method `getFullPath`). This two can't be overridden. You can through this parameter pass other
+  (like headers, authentication etc.)
+- __test function__
+  - this function should be async or return promise. It will get final response object as first parameter and you can
+  do here all necessary testing stuff. 
+
 ## Responses
 
 Every new route need to have method `requestHandler` which return promise and as it's resolver must be instance

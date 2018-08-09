@@ -28,6 +28,10 @@ class GetPostDetail extends ConsoleLogRoute {
         }
     }
 
+    getFullPath() {
+        return '/v0/posts' + this.getPath();
+    }
+
     async requestHandler(req, res) {
         const data = await this._postApiService.getPostData(req.params.postId);
 

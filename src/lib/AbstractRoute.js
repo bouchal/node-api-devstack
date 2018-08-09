@@ -17,6 +17,15 @@ export default class AbstractRoute {
         throw new TypeError("You must override method 'getPath' in your route.");
     }
 
+    /**
+     * In case, that route is added to some router with prefix, we can override this method to return
+     * actual full path.
+     *
+     * @return {string}
+     */
+    getFullPath() {
+        return this.getPath();
+    }
 
     /**
      * Return JSON schema for validation input data in body of request.
@@ -85,6 +94,6 @@ export default class AbstractRoute {
      * @return {string}
      */
     getName() {
-        return this.getMethod().toUpperCase() + ' ' + this.getPath();
+        return this.getMethod().toUpperCase() + ' ' + this.getFullPath();
     }
 }

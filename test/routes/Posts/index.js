@@ -1,0 +1,2 @@
+import './GetPostsLists';
+import './GetPostDetail';

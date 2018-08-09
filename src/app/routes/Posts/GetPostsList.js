@@ -16,6 +16,10 @@ class GetPostsList extends ConsoleLogRoute {
         return '';
     }
 
+    getFullPath() {
+        return '/v0/posts';
+    }
+
     async requestHandler(req, res) {
         const data = await this._postApiService.getPostList();
 
