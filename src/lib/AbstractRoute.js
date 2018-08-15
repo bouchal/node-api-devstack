@@ -32,7 +32,7 @@ export default class AbstractRoute {
      * If it return NULL, input validation is disabled.
      * You can't use it for GET.
      */
-    getDataSchema() {
+    getBodySchema() {
         return null;
     }
 

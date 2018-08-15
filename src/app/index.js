@@ -1,6 +1,7 @@
 import express from 'express';
 import configLoader from 'environmentconfig';
 import kontik from "kontik";
+import bodyParser from 'body-parser';
 import RouterLoader from "../lib/RouterLoader";
 
 const getConfig = () => {
@@ -23,6 +24,8 @@ const routerLoader = (app, services, config) => {
 
 const main = async () => {
     const app = express();
+
+    app.use(bodyParser.json());
 
     const config = getConfig();
     const services = getServices(config);

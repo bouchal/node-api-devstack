@@ -1,6 +1,6 @@
 {
   "name": "node-api-devstack",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "This is just empty devstack for creating new API service.",
   "main": "dist/index.js",
   "scripts": {
@@ -18,6 +18,7 @@
   "dependencies": {
     "ajv": "^6.5.2",
     "async-json-request": "^1.0.1",
+    "body-parser": "^1.18.3",
     "environmentconfig": "^1.3.1",
     "express": "^4.16.3",
     "kontik": "^1.2.1",

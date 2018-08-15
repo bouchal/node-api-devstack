@@ -161,16 +161,16 @@ export default class RouterLoader {
             ...(Array.isArray(routePreMiddleware) ? routePreMiddleware : [ routePreMiddleware ])
         ];
 
-        const dataSchema = route.getDataSchema();
+        const dataSchema = route.getBodySchema();
         const querySchema = route.getQuerySchema();
         const parametersSchema = route.getParametersSchema();
 
         if (dataSchema) {
-            const getDataFromRequest = (req) => {
-                return req.data;
+            const getBodyFromRequest = (req) => {
+                return req.body;
             };
 
-            middlewareArray.push(this._getValidationMiddleware(getDataFromRequest, dataSchema, 'DATA'));
+            middlewareArray.push(this._getValidationMiddleware(getBodyFromRequest, dataSchema, 'BODY'));
         }
 
         if (querySchema) {

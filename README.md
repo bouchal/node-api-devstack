@@ -117,9 +117,9 @@ For that is our routes prepared for passing validation JSON schemas directly in 
 You can again override scheme methods depends of what input you wanna validate. Each of this method should return 
 JSON-schema definition. Details is in documentation here: http://json-schema.org
 
-- __DATA BODY__
+- __BODY__
   - It's data passed in request body when you send `POST` or `PUT` request (and some others).
-  - *Method:* `getDataSchema`
+  - *Method:* `getBodySchema`
 - __PARAMETERS__
   - It's data passed in URI directly in path. For example: `/0/posts/:postId`, where `postId` is parameter.
   - *Method:* `getParametersSchema`
