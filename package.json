@@ -1,6 +1,6 @@
 {
   "name": "node-api-devstack",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "This is just empty devstack for creating new API service.",
   "main": "dist/index.js",
   "scripts": {

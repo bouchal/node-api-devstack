@@ -5,9 +5,9 @@ export default function (route, requestOptions, responseTestFn) {
     return function () {
         return new Promise(function (resolve, reject) {
             const req = httpMocks.createRequest({
-                ...requestOptions,
                 method: route.getMethod(),
-                url: route.getFullPath()
+                url: route.getFullPath(),
+                ...requestOptions
             });
 
             const res = httpMocks.createResponse({

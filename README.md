@@ -269,7 +269,7 @@ it('should return correct list data', routeTester(new GetUserRoute(mockServices,
   - Instance of tested route. It should create with mock data in constructor.
 - __request additional data__
   - In default request has set only 2 options `method` (from route method `getMethod`)
-  and `url` (from route method `getFullPath`). This two can't be overridden. You can through this parameter pass other
+  and `url` (from route method `getFullPath`). You can through this parameter pass other
   (like headers, authentication etc.)
 - __test function__
   - this function should be async or return promise. It will get final response object as first parameter and you can
