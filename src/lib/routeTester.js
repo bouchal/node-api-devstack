@@ -20,7 +20,7 @@ export default function (route, requestOptions, responseTestFn) {
 
             route.requestHandler(req, res).then((response) => {
                 response.sendToResponse(res);
-            });
+            }).catch(reject);
         });
     };
 };
