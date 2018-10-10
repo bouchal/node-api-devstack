@@ -40,7 +40,9 @@ Every route should be defined in `/src/app/routes`. When every file is equivalen
 
 So just create new JS file with class extended predefined `AbstractRoute` and it will be loaded automatically.
 
-But you need to follow some rules. But if you don't, program will throw Errors and tell you what to do.
+> If you want to ignore some files or dirs in structure, just name them with prefix `_` (`_ignoredDir`) or `.` (`.ignored_file`)  
+
+But you need to follow some rules. If you don't, program will throw Errors and tell you what to do.
 
 ### What rules?
 

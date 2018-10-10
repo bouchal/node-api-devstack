@@ -39,6 +39,11 @@ export default class RouterLoader {
         const dirItems = fs.readdirSync(dirPath);
 
         dirItems.forEach((item) => {
+            // Skip items started with `_`, `.`
+            if (['.', '_'].indexOf(item[0]) !== -1) {
+                return;
+            }
+
             const fullPath = dirPath + '/' + item;
 
             fs.statSync(fullPath).isDirectory()
