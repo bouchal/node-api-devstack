@@ -1,3 +1,10 @@
+# DEPRECATED but MOVED !!!
+
+Explore new TypeScript __kvapi__ DevStack here:
+- https://github.com/kvapi/kvapi
+
+## About
+
 Empty API ES6 DevStack with simple example for creating EP.
 
 ## Goal and The Idea Behind
